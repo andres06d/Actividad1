@@ -2,7 +2,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "aja";
 $dbname = "desarrollo_web";
 
 // Crear la conexión
