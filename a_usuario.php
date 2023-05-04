@@ -20,6 +20,8 @@ $fecha_nac = $_POST['fecha_nac'];
 $genero_id = $_POST['uno'];
 $observaciones = $_POST['observaciones'];
 $email = $_POST['email'];
+$programa = $_POST['programa'];
+echo "el programa es: ".$programa;
 $edicion = "";
 $validar = false;
 
