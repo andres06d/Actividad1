@@ -74,7 +74,7 @@
             // Crear la fila de encabezado
             // Crear la fila de encabezado
             var encabezado = document.createElement("tr");
-            encabezado.innerHTML = "<th class='px-6 py-3'>Genero</th><th class='px-6 py-3'>Identificación</th><th class='px-6 py-3'>Nombre</th><th class='px-6 py-3'>Email</th><th class='px-6 py-3'>Fecha de nacimiento</th><th class='px-6 py-3'>Observaciones</th>";
+            encabezado.innerHTML = "<th class='px-6 py-3'>Genero</th><th class='px-6 py-3'>Identificación</th><th class='px-6 py-3'>Nombre</th><th class='px-6 py-3'>Email</th><th class='px-6 py-3'>Fecha de nacimiento</th><th class='px-6 py-3'>Observaciones</th><th class='px-6 py-3'>Programa</th>";
             encabezado.classList.add("text-xs", "text-gray-700", "uppercase", "bg-gray-50", "dark:bg-gray-700", "dark:text-gray-400");
             tablaPersonas.appendChild(encabezado);
 
@@ -87,10 +87,11 @@
                     "</td><td class='px-6 py-4'>" + persona.nombre +
                     "</td><td class='px-6 py-4'>" + persona.email +
                     "</td><td class='px-6 py-4'>" + persona.fecha_nac +
-                    "</td><td class='px-6 py-4'>" + persona.observaciones + "</td>";
+                    "</td><td class='px-6 py-4'>" + persona.observaciones +
+                    "</td><td class='px-6 py-4'>" + persona.programa + "</td>";;
                 fila.classList.add("bg-white", "border-b", "dark:bg-gray-900", "dark:border-gray-700");
                 fila.querySelector("td:first-child").classList.add("font-medium", "text-gray-900", "whitespace-nowrap", "dark:text-white");
-                
+
                 tablaPersonas.appendChild(fila);
             });
 

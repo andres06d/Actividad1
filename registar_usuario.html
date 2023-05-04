@@ -75,7 +75,12 @@
                         \-->
                     </select>
                 </div>
-
+                <div class="mb-6">
+                    <label for="programa" class="block mb-2 text-sm font-medium text-gray-900 ">Programa</label>
+                    <select id="programa"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    </select>
+                </div>
                 <div class="mb-6">
                     <label for="observaciones"
                         class="block mb-2 text-sm font-medium text-gray-900 ">Observaciones</label>
@@ -93,7 +98,21 @@
     </div>
     <script>
 
-
+        axios.get('c_programa.php')
+            .then(function (response) {
+                var opciones = response.data;
+                var select = document.getElementById("programa");
+                for (var i = 0; i < opciones.length; i++) {
+                    var opcion = opciones[i];
+                    var element = document.createElement("option");
+                    element.value = opcion.id;
+                    element.innerHTML = opcion.nombre;
+                    select.appendChild(element);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
 
         axios.get('c_genero.php')

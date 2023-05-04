@@ -17,8 +17,11 @@ try {
     $identificacion = $_POST['identificacion'];
     //consultas preparadas 
  
-    $stament = $mbd->prepare("SELECT  personas.*, generos.Indice FROM personas, generos 
-    where identificacion= $identificacion and personas.genero_id=generos.nombre");
+    $stament = $mbd->prepare("SELECT  personas.*, generos.Indice, programas.id 
+    FROM personas, generos, programas
+    where identificacion= $identificacion 
+    and personas.genero_id=generos.nombre
+     and personas.programa=programas.nombre");
 
     $stament->execute();
     $result = $stament->fetchAll(PDO::FETCH_ASSOC);

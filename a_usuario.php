@@ -2,7 +2,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "aja";
+$password = "";
 $dbname = "desarrollo_web";
 
 // Crear la conexión
@@ -41,6 +41,9 @@ if (!empty($identificacion)) {
     }
     if (!empty($email)) {
         $edicion .= " ,email ='" . $email . "'";
+    }
+    if (!empty($programa)) {
+        $edicion .= " ,programa ='" . $programa . "'";
     }
 } else {
     echo "La identificacion esta vacia";

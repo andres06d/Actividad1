@@ -21,7 +21,7 @@
         <div>
 
             <div class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg ">
-                <a href="#" 
+                <a href="#"
                     class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 ">
                     Registar
                 </a>
@@ -90,7 +90,13 @@
                         \-->
                     </select>
                 </div>
+                <div class="mb-6">
+                    <label for="programa" class="block mb-2 text-sm font-medium text-gray-900 ">Programa</label>
+                    <select id="programa"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
 
+                    </select>
+                </div>
                 <div class="mb-6">
                     <label for="observaciones"
                         class="block mb-2 text-sm font-medium text-gray-900 ">Observaciones</label>
@@ -128,6 +134,8 @@
                         document.getElementById('genero').selectedIndex = persona[0].Indice;
                         document.getElementById('observaciones').value = persona[0].observaciones;
                         document.getElementById('correo').value = persona[0].email;
+                        document.getElementById('programa').selectedIndex = (persona[0].id - 1);
+
                         resultadoBusqueda = true;
                     }
                     else {
@@ -137,6 +145,7 @@
                         document.getElementById('genero').value = "";
                         document.getElementById('observaciones').value = "";
                         document.getElementById('correo').value = "";
+                        document.getElementById('programa').value = "";
                     }
 
 
@@ -147,13 +156,27 @@
 
         }
 
+        function limpiar() {
+            document.getElementById('identificacion').value = "";
+            document.getElementById('nombre').value = "";
+            document.getElementById('fecha_nac').value = "";
+            document.getElementById('genero').value = "";
+            document.getElementById('observaciones').value = "";
+            document.getElementById('correo').value = "";
+            document.getElementById('programa').value = "";
+        }
+
         function editar() {
+           
             var identificacion = document.getElementById("identificacion").value;
             var nombre = document.getElementById("nombre").value;
             var fecha_nac = document.getElementById("fecha_nac").value;
             var combo = document.getElementById("genero");
             var genero_id = combo.options[combo.selectedIndex].text;
             var correo = document.getElementById('correo').value;
+            var programa2 = document.getElementById('programa');
+            var programa = programa2.options[programa2.selectedIndex].text;
+
             //var genero_id = document.querySelector("#genero option:checked").value;
             //alert(genero_id);
             var observaciones = document.getElementById("observaciones").value;
@@ -166,9 +189,10 @@
             formData.append("observaciones", observaciones);
             formData.append("uno", hola);
             formData.append("email", correo);
+            formData.append("programa", programa);
 
 
-
+            limpiar();
             axios.post('a_usuario.php', formData)
 
 
@@ -180,7 +204,9 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+
         }
+
 
         boton = document.getElementById("btn-buscar")
         boton.addEventListener("click", buscar);
@@ -196,19 +222,14 @@
             } else {
                 // Si la variable local es false, hacer algo más o no hacer nada
             }
+
         });
+
 
 
     </script>
 
-    <script>
 
-        document.getElementById("btn-enviar").addEventListener("click", function (event) {
-            event.preventDefault();
-            document.getElementById("formulario").submit();
-            document.getElementById("formulario").reset();
-        });
-    </script>
 
 
     <script>
@@ -216,6 +237,23 @@
             .then(function (response) {
                 var opciones = response.data;
                 var select = document.getElementById("genero");
+                for (var i = 0; i < opciones.length; i++) {
+                    var opcion = opciones[i];
+                    var element = document.createElement("option");
+                    element.value = opcion.id;
+                    element.innerHTML = opcion.nombre;
+                    select.appendChild(element);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+        axios.get('c_programa.php')
+            .then(function (response) {
+                var opciones = response.data;
+                var select = document.getElementById("programa");
                 for (var i = 0; i < opciones.length; i++) {
                     var opcion = opciones[i];
                     var element = document.createElement("option");
