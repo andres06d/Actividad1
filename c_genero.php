@@ -12,7 +12,7 @@
 
 //con query
 try {
-    $mbd = new PDO('mysql:host=localhost;dbname=desarrollo_web', 'root', '');
+    $mbd = new PDO('mysql:host=localhost;dbname=desarrollo_web', 'rot', '');
 
    
     //consultas preparadas 
