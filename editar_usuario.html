@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de personas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="bg-indigo-100 p-5">
+        <h1 class="text-4xl text-center bg-">Ingresar personas</h1>
+    </nav>
+
+
+    <div class="container mx-auto p-6 grid grid-cols-4">
+        <div>
+
+            <div class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg ">
+                <a href="#" 
+                    class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 ">
+                    Registar
+                </a>
+                <a href="#" aria-current="true"
+                    class="block w-full px-4 py-2 text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer ">
+                    Editar
+                </a>
+                <a href="#"
+                    class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 ">
+                    Mostar
+                </a>
+                <a href="#"
+                    class="block w-full px-4 py-2 rounded-b-lg cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 ">
+                    Eliminar
+                </a>
+            </div>
+
+        </div>
+        <div class="col-span-3">
+            <h1 class="text-2xl font-semibold">Formulario de registro</h1>
+
+            <div class="mb-6">
+
+                <label for="identificacion" class="block mb-2 text-sm font-medium text-gray-900 ">Identificación</label>
+                <div class="flex">
+                    <input type="number" id="identificacion"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        required>
+                    </input>
+
+                    <button type="button" id="btn-buscar"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-2">Buscar
+                    </button>
+                </div>
+            </div>
+
+            <form class="mt-2" id="formulario">
+
+                <div class="mb-6">
+                    <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
+                    <input type="text" id="nombre"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        required>
+                </div>
+                <div class="mb-6">
+                    <label for="correo" class="block mb-2 text-sm font-medium text-gray-900 ">Correo</label>
+                    <input type="text" id="correo"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        required>
+                </div>
+                <div class="mb-6">
+                    <label for="fecha_nac" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha de
+                        nacimiento</label>
+                    <input type="date" id="fecha_nac"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="genero" class="block mb-2 text-sm font-medium text-gray-900 ">Genero</label>
+                    <select id="genero"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                        \<!-- 
+                             <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                        \-->
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label for="observaciones"
+                        class="block mb-2 text-sm font-medium text-gray-900 ">Observaciones</label>
+                    <textarea id="observaciones" rows="4"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+                        placeholder="Leave a comment..."></textarea>
+                </div>
+
+                <button type="button" id="btn-enviar"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            </form>
+
+
+        </div>
+    </div>
+    <script>
+        var resultadoBusqueda = false;
+        function buscar() {
+            var identificacion = document.getElementById("identificacion").value;
+
+            var formData = new FormData();
+            formData.append("identificacion", identificacion);
+
+            axios.post('c_persona.php', formData)
+
+                .then(function (response) {
+
+                    var persona = response.data
+
+                    if (persona.length > 0) {
+                        console.log(persona)
+                        document.getElementById('identificacion').value = persona[0].identificacion;
+                        document.getElementById('nombre').value = persona[0].nombre;
+                        document.getElementById('fecha_nac').value = persona[0].fecha_nac;
+                        document.getElementById('genero').selectedIndex = persona[0].Indice;
+                        document.getElementById('observaciones').value = persona[0].observaciones;
+                        document.getElementById('correo').value = persona[0].email;
+                        resultadoBusqueda = true;
+                    }
+                    else {
+                        console.log("No se encuentra la persona")
+                        document.getElementById('nombre').value = "";
+                        document.getElementById('fecha_nac').value = "";
+                        document.getElementById('genero').value = "";
+                        document.getElementById('observaciones').value = "";
+                        document.getElementById('correo').value = "";
+                    }
+
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+
+        function editar() {
+            var identificacion = document.getElementById("identificacion").value;
+            var nombre = document.getElementById("nombre").value;
+            var fecha_nac = document.getElementById("fecha_nac").value;
+            var combo = document.getElementById("genero");
+            var genero_id = combo.options[combo.selectedIndex].text;
+            var correo = document.getElementById('correo').value;
+            //var genero_id = document.querySelector("#genero option:checked").value;
+            //alert(genero_id);
+            var observaciones = document.getElementById("observaciones").value;
+            var hola = combo.options[combo.selectedIndex].text;
+
+            var formData = new FormData();
+            formData.append("identificacion", identificacion);
+            formData.append("nombre", nombre);
+            formData.append("fecha_nac", fecha_nac);
+            formData.append("observaciones", observaciones);
+            formData.append("uno", hola);
+            formData.append("email", correo);
+
+
+
+            axios.post('a_usuario.php', formData)
+
+
+
+
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        boton = document.getElementById("btn-buscar")
+        boton.addEventListener("click", buscar);
+
+        var boton2 = document.getElementById("btn-enviar");
+
+        // Agregar manejador de eventos click al botón
+        boton2.addEventListener("click", function () {
+            // Verificar si la variable local es true
+            if (resultadoBusqueda) {
+                // Llamar a la función buscar()
+                editar();
+            } else {
+                // Si la variable local es false, hacer algo más o no hacer nada
+            }
+        });
+
+
+    </script>
+
+    <script>
+
+        document.getElementById("btn-enviar").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("formulario").submit();
+            document.getElementById("formulario").reset();
+        });
+    </script>
+
+
+    <script>
+        axios.get('c_genero.php')
+            .then(function (response) {
+                var opciones = response.data;
+                var select = document.getElementById("genero");
+                for (var i = 0; i < opciones.length; i++) {
+                    var opcion = opciones[i];
+                    var element = document.createElement("option");
+                    element.value = opcion.id;
+                    element.innerHTML = opcion.nombre;
+                    select.appendChild(element);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    </script>
+
+
+</body>
+
+
+</html>
