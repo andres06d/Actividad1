@@ -40,35 +40,35 @@
             </div>
 
         </div>
-          <div class="col-span-3">
+        <div class="col-span-3">
             <div class="container mx-auto my-10">
-              <h1 class="text-2xl font-bold mb-5">Listado de personas</h1>
-              <table id="tabla-personas" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th class="px-4 py-2">Género ID</th>
-                        <th class="px-4 py-2">Identificación</th>
-                        <th class="px-4 py-2">Nombre</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-4 py-2">Fecha de nacimiento</th>
-                        <th class="px-4 py-2">Observaciones</th>
-                        <th class="px-4 py-2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-personas">
-                </tbody>
-                
-              </table>
+                <h1 class="text-2xl font-bold mb-5">Listado de personas</h1>
+                <table id="tabla-personas" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-4 py-2">Género ID</th>
+                            <th class="px-4 py-2">Identificación</th>
+                            <th class="px-4 py-2">Nombre</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Fecha de nacimiento</th>
+                            <th class="px-4 py-2">Observaciones</th>
+                            <th class="px-4 py-2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-personas">
+                    </tbody>
+
+                </table>
             </div>
             <div class="text-right mt-5">
-              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Eliminar personas
-              </button>
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Eliminar personas
+                </button>
             </div>
-          </div>
         </div>
-      </div>
-      
+    </div>
+    </div>
+
 
     <script>
 
@@ -98,10 +98,14 @@
                     "</td><td class='px-6 py-4'>" + persona.fecha_nac +
                     "</td><td class='px-6 py-4'>" + persona.observaciones +
                     "</td><td class='px-6 py-4'>" + persona.programa +
-                    "</td><td class='px-6 py-4'>" ;
+                    "</td><td class='px-6 py-4'>";
                 fila.classList.add("bg-white", "border-b", "dark:bg-gray-900", "dark:border-gray-700");
                 fila.querySelector("td:first-child").classList.add("font-medium", "text-gray-900", "whitespace-nowrap", "dark:text-white");
                 fila.querySelector("td:last-child").innerHTML = "<a href='#' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Eliminar</a>";
+                fila.querySelector("td:last-child > a").addEventListener("click", function () {
+                    var identificacion = persona.identificacion;
+                    eliminarPersona(identificacion);
+                });
                 tablaPersonas.appendChild(fila);
             });
 
@@ -118,7 +122,28 @@
             });
 
 
+        function eliminarPersona(identificacion) {
+            // Definir la URL del archivo PHP que elimina la persona
+            const url = 'd_persona.php';
 
+            // Definir los datos que se enviarán al archivo PHP
+            var formData = new FormData();
+            formData.append("datos", identificacion);
+
+            // Llamar al archivo PHP utilizando la librería axios
+            axios.post(url, formData)
+                .then(function (response) {
+                    console.log(response.data);
+                    alert('La persona ha sido eliminada correctamente.');
+                    // después de eliminar la persona
+                    location.reload();
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('Ha ocurrido un error al intentar eliminar la persona.');
+                });
+        }
 
     </script>
 

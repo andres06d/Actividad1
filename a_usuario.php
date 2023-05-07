@@ -1,16 +1,9 @@
 <?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "desarrollo_web";
-
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+$mbd = new PDO('mysql:host=localhost;dbname=desarrollo_web', 'root', '');
 
 // Comprobar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+if (!$mbd) {
+    die("Conexión fallida: " . $mbd->connect_error);
 }
 
 // Recuperar los datos del formulario
@@ -46,21 +39,24 @@ if (!empty($identificacion)) {
         $edicion .= " ,programa ='" . $programa . "'";
     }
 } else {
-    echo "La identificacion esta vacia";
+    die("La identificación está vacía.");
 }
 
 if ($validar) {
-    // Ejecutar la consulta SQL
-    $sql = "UPDATE personas SET $edicion WHERE personas.identificacion=$identificacion";
-    echo $sql;
-    if ($conn->query($sql) === TRUE) {
+    // Ejecutar la consulta SQL utilizando sentencias preparadas
+    $stmt = $mbd->prepare("UPDATE personas SET nombre = ?, fecha_nac = ?, genero_id = ?, observaciones = ?, email = ?, programa = ? WHERE personas.identificacion = ?");
+    $stmt->execute([$nombre, $fecha_nac, $genero_id, $observaciones, $email, $programa, $identificacion]);
+
+    if ($stmt->rowCount() > 0) {
         echo "Los datos se han guardado correctamente en la base de datos.";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: no se ha actualizado ningún registro.";
     }
 
     // Cerrar la conexión
-    $conn->close();
+    $mbd = null;
 } else {
-    echo "la identificacion esta vacia";
+    die("La identificación está vacía.");
 }
+?>
+

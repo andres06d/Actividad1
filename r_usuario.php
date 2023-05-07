@@ -1,33 +1,49 @@
+
+
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "desarrollo_web";
 
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Comprobar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+
+//header('Content-type: application/json;charset=utf-8');
+
+
+//$estudiante=[1,2,3,4,5,6,7,8,9,10];
+
+//echo json_encode($estudiante);
+
+//con query
+try {
+    $mbd = new PDO('mysql:host=localhost;dbname=desarrollo_web', 'root', '');
+
+    $datos = $_POST['datos'];
+
+    //consultas preparadas 
+ 
+    $stament = $mbd->prepare("INSERT INTO personas (genero_id, identificacion, nombre, email, fecha_nac,observaciones, programa) VALUES $datos");
+
+    $stament->execute();
+    $result = $stament->fetchAll(PDO::FETCH_ASSOC);
+
+    //print($_GET); //buscar como usar
+    //_POST buscar
+
+    $mbd = null;
+
+    header('Content-type:application/json;charset=utf-8');
+    echo json_encode($result);
+} catch (PDOException $e) {
+    
+    $mensaje = $e->getMessage();
+
+    if (strpos($mensaje, "for key 'PRIMARY'") !== false) {
+        echo("El mensaje contiene la subcadena 'for key 'PRIMARY''");
+    } else {
+        print "¡Error!: " . $e->getMessage() . "<br/>";
+    }
+    
+    
+
+    
+    die();
 }
-
-// Recuperar los datos del formulario
-$identificacion = $_POST['identificacion'];
-$nombre = $_POST['nombre'];
-$fecha_nac = $_POST['fecha_nac'];
-$genero_id = $_POST['genero_id'];
-$observaciones = $_POST['observaciones'];
-
-// Ejecutar la consulta SQL
-$sql = "INSERT INTO personas (genero_id, identificacion, nombre, email, fecha_nac, observaciones) VALUES ('$genero_id', '$identificacion', '$nombre','no tiene','$fecha_nac','$observaciones')";
-if ($conn->query($sql) === TRUE) {
-    echo "Los datos se han guardado correctamente en la base de datos.";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-// Cerrar la conexión
-$conn->close();
-?>

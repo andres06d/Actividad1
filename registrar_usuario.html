@@ -41,65 +41,68 @@
             </div>
 
         </div>
-    <div class="col-span-3">
-        <div class="border border-gray-300 rounded-lg shadow-lg p-6 ">
-            <h1 class="text-2xl font-semibold mb-6">Formulario de registro</h1>
-            
-            
-        <form class="mt-2" id="formulario">
-            <div class="mb-6">
-                <label for="identificacion"
-                    class="block mb-2 text-sm font-medium text-gray-900 ">Identificación</label>
-                <input type="number" id="identificacion"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                    required>
-              
+        <div class="col-span-3">
+            <div class="border border-gray-300 rounded-lg shadow-lg p-6 ">
+                <h1 class="text-2xl font-semibold mb-6">Formulario de registro</h1>
+
+
+                <form class="mt-2" id="formulario" onsubmit="event.preventDefault();">
                     <div class="mb-6">
-                        <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
-                        <input type="text" id="nombre"
+                        <label for="identificacion"
+                            class="block mb-2 text-sm font-medium text-gray-900 ">Identificación</label>
+                        <input type="number" id="identificacion"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                             required>
-                    </div>
-              
-                    <div class="mb-6">
-                        <label for="fecha_nac" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha de
-                            nacimiento</label>
-                        <input type="date" id="fecha_nac"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            required>
-                    </div>
-          
-                    <div class="mb-6">
-                        <label for="genero" class="block mb-2 text-sm font-medium text-gray-900 ">Genero</label>
-                        <select id="genero"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            \<!-- 
-                                 <option value="1">Masculino</option>
-                            <option value="2">Femenino</option>
-                            \-->
-                        </select>
-                    </div>
-              
-                    <div class="mb-6">
-                        <label for="programa" class="block mb-2 text-sm font-medium text-gray-900 ">Programa</label>
-                        <select id="programa"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        </select>
-                    </div>
-              
-                    <div class="mb-6">
-                        <label for="observaciones"
-                            class="block mb-2 text-sm font-medium text-gray-900 ">Observaciones</label>
-                        <textarea id="observaciones" rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                            placeholder="Leave a comment..."></textarea>
-                    </div>
-          
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Enviar</button>
-            </form>
-          </div>
+
+                        <div class="mb-6">
+                            <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
+                            <input type="text" id="nombre"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="fecha_nac" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha de
+                                nacimiento</label>
+                            <input type="date" id="fecha_nac"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Correo</label>
+                            <input type="text" id="correo"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="genero" class="block mb-2 text-sm font-medium text-gray-900 ">Genero</label>
+                            <select id="genero"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="programa" class="block mb-2 text-sm font-medium text-gray-900 ">Programa</label>
+                            <select id="programa"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="observaciones"
+                                class="block mb-2 text-sm font-medium text-gray-900 ">Observaciones</label>
+                            <textarea id="observaciones" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+                                placeholder="Leave a comment..."></textarea>
+                        </div>
+
+                        <button type="submit" id="btn-enviar"
+                            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Enviar</button>
+                </form>
+            </div>
         </div>
-    </div>  
+    </div>
     </div>
     <script>
 
@@ -144,48 +147,70 @@
             var identificacion = document.getElementById("identificacion").value;
             var nombre = document.getElementById("nombre").value;
             var fecha_nac = document.getElementById("fecha_nac").value;
-            var combo = document.getElementById("genero");
-            var genero_id = combo.options[combo.selectedIndex].text;
-            //var genero_id = document.querySelector("#genero option:checked").value;
-            //alert(genero_id);
+
+
+            var correo = document.getElementById('correo').value;
+            var programa2 = document.getElementById('programa');
+            var programa = programa2.options[programa2.selectedIndex].text;
+
+
             var observaciones = document.getElementById("observaciones").value;
+            var combo = document.getElementById("genero");
             var hola = combo.options[combo.selectedIndex].text;
 
+            // genero_id, identificacion, nombre, email, fecha_nac,observaciones, programa
+
+
+            var datos = "('" + hola + "'," + "'" + identificacion + "', '" + nombre + "', " + "'" + correo + "'," + "'" + fecha_nac + "', '" + observaciones + "', '" + programa + "')";
+
+            console.log("los datos son: " + datos);
+
+
             var formData = new FormData();
-            formData.append("identificacion", identificacion);
-            formData.append("nombre", nombre);
-            formData.append("fecha_nac", fecha_nac);
-            formData.append("genero_id", genero_id);
-            formData.append("observaciones", observaciones);
-            formData.append("uno", hola);
+            formData.append("datos", datos);
 
 
 
-            axios.post('r_usuario.php', formData)
+            var hols = null;
+            var formulario = document.getElementById("formulario");
 
+            // Resetear el formulario
+            formulario.reset();
 
-
-
+            axios.post('r_usuario.php', formData, {
+                timeout: 5000 // aumentar el tiempo de espera a 5 segundos (5000 ms)
+            })
                 .then(function (response) {
-                    console.log(response);
+                    hols = console.log(response);
+
+
                 })
                 .catch(function (error) {
+
                     console.log(error);
+
+
+
+
+
                 });
+
+            console.log(hols);
         }
 
         boton = document.getElementById("btn-enviar")
         boton.addEventListener("click", enviar);
+        function borrarFormulario() {
+            // Obtener el formulario
+            var formulario = document.getElementById("formulario");
+
+            // Resetear el formulario
+            formulario.reset();
+        }
+
     </script>
 
-    <script>
 
-        document.getElementById("btn-enviar").addEventListener("click", function (event) {
-            event.preventDefault();
-            document.getElementById("formulario").submit();
-            document.getElementById("formulario").reset();
-        });
-    </script>
 
 </body>
 

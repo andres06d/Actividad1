@@ -22,8 +22,7 @@ try {
     $stament->execute();
     $result = $stament->fetchAll(PDO::FETCH_ASSOC);
 
-    //print($_GET); //buscar como usar
-    //_POST buscar
+   
 
     $mbd = null;
 
